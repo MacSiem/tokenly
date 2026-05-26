@@ -1,0 +1,56 @@
+name: lint-no-leaks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  blocklist:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Refuse known-secret patterns
+        run: |
+          set -eu
+          # Each entry below is a literal string that must NEVER appear in this
+          # repository. Most are real Tokenly internal identifiers; the rest
+          # are generic patterns that suggest a credential leak.
+          patterns=(
+            "claude_ai_session_cookie"
+            "openai_admin_api_key"
+            "openai_api_key"
+            "anthropic_admin_api_key"
+            "openrouter_api_key"
+            "chatgpt_access_token"
+            "chatgpt_account_id"
+            "usagedeck_syncd_secret"
+            "AuthKey_CUB63D2YN8"
+            "CUB63D2YN8"
+            "tokenly-android-release.jks"
+            "8761f9b5-74b5-4fc6-b8c0-3a7022bc0243"
+            "BEGIN PRIVATE KEY"
+            "BEGIN RSA PRIVATE KEY"
+            "BEGIN OPENSSH PRIVATE KEY"
+            "-----BEGIN CERTIFICATE-----"
+            "sk-ant-admin-"
+            "sk-or-v1-"
+            "gho_"
+            "ghp_"
+          )
+
+          hits=0
+          for needle in "${patterns[@]}"; do
+            if grep -RIn --exclude-dir=.git --exclude=lint-no-leaks.yml -- "$needle" .; then
+              echo "::error::blocked string '$needle' is present in the public transparency repo"
+              hits=$((hits+1))
+            fi
+          done
+
+          if [ "$hits" -gt 0 ]; then
+            echo "::error::Refusing to merge: $hits blocked strings present."
+            exit 1
+          fi
+          echo "ok: no blocklisted strings present"
