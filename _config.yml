@@ -1,0 +1,17 @@
+title: Tokenly
+description: Local-first LLM usage and cost tracker — privacy policy, security model, threat model, and architecture overview.
+url: https://macsiem.github.io
+baseurl: /tokenly
+theme: jekyll-theme-cayman
+
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default
+
+show_downloads: false
+
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
