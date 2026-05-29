@@ -7,8 +7,8 @@ permalink: /privacy/
 # Tokenly — Privacy Policy
 
 **Effective date:** 2026-05-26
-**Developer:** Maciej Siemiński (sole proprietor)
-**Contact:** maciek.sieminski@gmail.com
+**Developer:** Maciej Siemiński
+**Contact:** mail@macsiem.dev
 
 Tokenly is a local-first LLM usage and cost tracker. This document describes every piece of data Tokenly touches, where it stays, and what we send anywhere off your device.
 
@@ -101,4 +101,4 @@ If anything material changes (we add an SDK, change a default, ship a new platfo
 
 ## Contact
 
-For privacy questions, write to maciek.sieminski@gmail.com.
+For privacy questions, write to mail@macsiem.dev.
