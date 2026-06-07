@@ -6,9 +6,11 @@ permalink: /privacy/
 
 # Tokenly — Privacy Policy
 
-**Effective date:** 2026-05-26
+**Effective date:** 2026-06-07
 **Developer:** Maciej Siemiński
 **Contact:** mail@macsiem.dev
+
+**Data controller:** Maciej Siemiński (mail@macsiem.dev). For the version of the app distributed via **Google Play (Android)**, the data controller is **LICENCEPRO POLSKA Sp. z o.o.**, ul. Huculska 6, 00-730 Warszawa, Polska, contact: mail@macsiem.dev.
 
 Tokenly is a local-first LLM usage and cost tracker. This document describes every piece of data Tokenly touches, where it stays, and what we send anywhere off your device.
 
@@ -91,7 +93,11 @@ If we ever add anything that changes the surface above (crash uploader, analytic
 - **You can stop using Tokenly at any time.** Uninstalling removes all local app data. Provider credentials in the OS keychain stay until you choose Disconnect or wipe the keychain entry yourself.
 - **You can revoke each provider in the app's Providers tab.** Disconnect removes the credential from the local keychain (and wipes the WKWebView cookies/local storage for that domain on macOS).
 - **You can revoke iCloud sync** by toggling Tokenly off in iOS Settings → Apple ID → iCloud → iCloud Drive → Apps.
-- **EU users (GDPR):** Maciej Siemiński is the data controller for Tokenly. Because Tokenly processes data only on your devices, the legal basis is your consent (granted by installing and configuring the app). You may withdraw consent at any time by uninstalling Tokenly or revoking permissions.
+- **EU users (GDPR):** the data controller for Tokenly is Maciej Siemiński; for the Google Play (Android) version it is LICENCEPRO POLSKA Sp. z o.o., ul. Huculska 6, 00-730 Warszawa, Polska (contact for both: mail@macsiem.dev). Tokenly processes data only on your devices; the legal bases are performance of the service you request (Art. 6(1)(b) GDPR — providing the app's features on your devices) and your consent for optional features such as iCloud sync, camera-based pairing or notifications (Art. 6(1)(a) GDPR), which you can withdraw at any time in system settings or by uninstalling the app.
+- **Your GDPR rights:** you have the right to access, rectify, erase, restrict, or object to processing of your personal data, and the right to data portability. Because all Tokenly data lives on your devices, you can exercise most of these rights directly (Disconnect, uninstall, keychain wipe, iCloud toggle). For anything else, write to mail@macsiem.dev.
+- **Complaint:** you have the right to lodge a complaint with a supervisory authority. In Poland this is the President of the Personal Data Protection Office (UODO), ul. Stawki 2, 00-193 Warszawa, [uodo.gov.pl](https://uodo.gov.pl/).
+- **Data retention:** local data stays on your devices until you remove it (Disconnect, uninstall, or keychain/iCloud cleanup). We operate no server and retain nothing ourselves.
+- **International transfers:** Tokenly itself transfers no data abroad. Connections to your configured providers (claude.ai, chatgpt.com, api.anthropic.com, api.openai.com, openrouter.ai) and to your own iCloud container are made directly from your device under those providers' terms and your own accounts.
 - **California users (CCPA):** Tokenly does not sell your personal information. It does not have any of your personal information to sell.
 - **Children:** Tokenly is not directed at children under 13. We do not knowingly process data from children under 13.
 
