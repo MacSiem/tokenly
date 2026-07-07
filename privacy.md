@@ -53,8 +53,8 @@ The macOS app ships an **opt-in, local-only** crash logger. When enabled and the
 
 | Platform | Secure store | Notes |
 |---|---|---|
-| macOS (publisher) | Apple Keychain (`kSecAttrAccessibleWhenUnlocked`, not iCloud-synced) | All provider credentials and the syncd shared secret/fingerprint live here. Cert files in `~/Library/Application Support/dev.macsiem.tokenly.mac/` are backed up to Keychain on first run and auto-restored on launch. |
-| iOS (viewer) | Apple Keychain (`kSecAttrAccessibleWhenUnlocked`, `kSecAttrSynchronizable=false`) | Stores only the per-host pairing token, TLS fingerprint and shared secret. **No provider credentials live on iOS.** |
+| macOS (publisher) | Apple Keychain (`kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly`, not iCloud-synced) | All provider credentials and the syncd shared secret/fingerprint live here. Cert files in `~/Library/Application Support/dev.macsiem.tokenly.mac/` are backed up to Keychain on first run and auto-restored on launch. |
+| iOS (viewer) | Apple Keychain (`kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly`, `kSecAttrSynchronizable=false` — readable after the first unlock so background refresh, widgets and the Live Activity keep working while the device is locked) | Stores only the per-host pairing token, TLS fingerprint and shared secret. **No provider credentials live on iOS.** |
 | Android (viewer) | EncryptedSharedPreferences (AES-256-GCM key wrap) | Stores only the per-host pairing token, TLS fingerprint and shared secret. **No provider credentials live on Android.** |
 | Windows (viewer / publisher) | Windows Credential Manager (resource `dev.macsiem.tokenly.windows`) | Stores per-host pairing token + fingerprint + shared secret on the device that holds them. |
 
@@ -72,9 +72,23 @@ Tokenly only opens connections to the providers you've configured. By default it
 
 Tokenly does not call any other host. There is no opt-out flag because there is nothing to opt out of — the list above is the entire network surface.
 
+
+## Daily usage history (on-device)
+
+Since v0.7.2 (b75) each device records a small local history file — one entry per day per provider
+with the peak window usage and month-to-date spend it saw in the mirrored snapshots
+(`usage-history.v1.json` in the app-group container). It powers the 14-day History chart in provider
+details. This file never leaves the device and is deleted with the app.
+
+## Widgets fetching data on their own
+
+Since v0.7.2 (b77) the iOS widget may fetch the end-to-end-encrypted cloud snapshot itself when its
+local copy is older than about 10 minutes. This uses the same encrypted relay path as the app; the
+relay stores only the encrypted blob and cannot read it.
+
 ## Third-party services
 
-Tokenly currently bundles **no** third-party SDKs in any shipped build. Future Premium (one-time unlock) will route through Apple App Store / Google Play in-app purchases; in that case Apple / Google handle the transaction and Tokenly receives only a "Premium yes/no" entitlement flag.
+Tokenly currently bundles **no** third-party SDKs in any shipped build. Premium on mobile is a subscription (monthly or yearly, after a 7-day full-featured trial) handled entirely by Apple App Store / Google Play in-app purchases; Apple / Google process the transaction and Tokenly receives only an entitlement flag. Desktop stays free. The 7-day trial is tracked with an anonymous device-scoped identifier so it cannot be restarted by reinstalling; no personal data is involved.
 
 If we ever add anything that changes the surface above (crash uploader, analytics, etc.) the new policy will be published here with a new effective date and the change will be called out in the in-app release notes **before** it ships.
 
