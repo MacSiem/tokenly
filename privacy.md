@@ -72,8 +72,14 @@ Tokenly only opens connections to the providers you've configured. By default it
 - `openrouter.ai` — to read your OpenRouter credits (only if you've added an OpenRouter key)
 - Your local LAN, for paired iPhone / Android / Windows clients pulling the snapshot (mDNS + TLS, never the public internet)
 - Apple's iCloud Drive servers, only for the optional encrypted off-LAN snapshot fallback (Apple devices only)
+- `status.anthropic.com` / `status.openai.com` — public provider **status pages**, fetched anonymously (no credentials, no identifiers) so the app can show an incident badge when a provider is having an outage (since v0.7.2 b85)
 
 Tokenly does not call any other host. There is no opt-out flag because there is nothing to opt out of — the list above is the entire network surface.
+
+When a provider changes its API response format unexpectedly, the app's local
+diagnostic log may record the **structure** of that response — field names and
+value types only, never the values, your keys, or your usage figures (since
+v0.7.2 b85).
 
 
 ## Daily usage history (on-device)
