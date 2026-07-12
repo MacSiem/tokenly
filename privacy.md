@@ -73,6 +73,7 @@ Tokenly only opens connections to the providers you've configured. By default it
 - Your local LAN, for paired iPhone / Android / Windows clients pulling the snapshot (mDNS + TLS, never the public internet)
 - Apple's iCloud Drive servers, only for the optional encrypted off-LAN snapshot fallback (Apple devices only)
 - `status.anthropic.com` / `status.openai.com` — public provider **status pages**, fetched anonymously (no credentials, no identifiers) so the app can show an incident badge when a provider is having an outage (since v0.7.2 b85)
+- `trial.tokenly.macsiem.dev` — desktop only: trial state and **legacy Polar license** activation checks. The endpoint sees an opaque device/account identifier and (for legacy licenses) the license key — never your name, email, provider credentials, or usage data
 
 Tokenly does not call any other host. There is no opt-out flag because there is nothing to opt out of — the list above is the entire network surface.
 
@@ -97,7 +98,7 @@ relay stores only the encrypted blob and cannot read it.
 
 ## Third-party services
 
-Tokenly currently bundles **no** third-party SDKs in any shipped build. Premium on mobile is a subscription (monthly or yearly, after a 7-day full-featured trial) handled entirely by Apple App Store / Google Play in-app purchases; Apple / Google process the transaction and Tokenly receives only an entitlement flag. Desktop stays free. The 7-day trial is tracked with an anonymous device-scoped identifier so it cannot be restarted by reinstalling; no personal data is involved.
+Tokenly currently bundles **no** active third-party analytics or advertising SDKs in any shipped build (a crash-reporting framework is linked but disabled — see "What about crash logs?"). Premium on mobile is a subscription (monthly or yearly, after a 7-day full-featured trial) handled entirely by Apple App Store / Google Play in-app purchases; Apple / Google process the transaction and Tokenly receives only an entitlement flag. Desktop stays free; holders of **legacy desktop licenses bought through Polar** (Merchant of Record — payment, invoicing and tax handled by Polar/Stripe) keep them, and activation is validated against `trial.tokenly.macsiem.dev` as described under Network traffic. The 7-day trial is tracked with an anonymous device-scoped identifier so it cannot be restarted by reinstalling; no personal data is involved.
 
 If we ever add anything that changes the surface above (crash uploader, analytics, etc.) the new policy will be published here with a new effective date and the change will be called out in the in-app release notes **before** it ships.
 
