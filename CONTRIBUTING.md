@@ -19,7 +19,7 @@ For these, open a regular pull request against `main`. I will review within ~3 w
 
 ## How to suggest a feature for the app
 
-The app code is closed-source, but I read every email at `maciek.sieminski@gmail.com`. Send:
+The app code is closed-source, but I read every email at `mail@macsiem.dev`. Send:
 
 1. The use case you have in mind.
 2. Which platform you'd use it on (iOS / macOS / Android / Windows).
@@ -39,4 +39,4 @@ Be kind, on-topic, and assume the other person is acting in good faith.
 
 ## Contact
 
-Maciej Siemiński · maciek.sieminski@gmail.com
+Maciej Siemiński · mail@macsiem.dev · [macsiem.dev](https://macsiem.dev/)

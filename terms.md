@@ -6,9 +6,12 @@ permalink: /terms/
 
 # Tokenly — Terms of Service
 
+> **Canonical:** this page is maintained at [https://macsiem.dev/tokenly/terms/](https://macsiem.dev/tokenly/terms/) — older mirrors, including this GitHub Pages copy, are deprecated and may lag behind the canonical version.
+
 **Effective date:** 2026-05-26
-**Developer:** Maciej Siemiński (sole proprietor)
-**Contact:** maciek.sieminski@gmail.com
+**Last updated:** 12 July 2026
+**Developer:** Maciej Siemiński
+**Contact:** mail@macsiem.dev
 
 These terms govern your use of the Tokenly applications for Apple (iOS + macOS), Android, and Windows.
 
@@ -56,4 +59,4 @@ These terms are governed by the laws of Poland, where the developer is establish
 
 ## Contact
 
-For questions about these terms, write to maciek.sieminski@gmail.com.
+For questions about these terms, write to mail@macsiem.dev.

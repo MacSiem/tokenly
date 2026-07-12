@@ -6,7 +6,10 @@ permalink: /privacy/
 
 # Tokenly — Privacy Policy
 
+> **Canonical:** this page is maintained at [https://macsiem.dev/tokenly/privacy/](https://macsiem.dev/tokenly/privacy/) — older mirrors, including this GitHub Pages copy, are deprecated and may lag behind the canonical version.
+
 **Effective date:** 2026-06-07
+**Last updated:** 12 July 2026
 **Developer:** Maciej Siemiński
 **Contact:** mail@macsiem.dev
 

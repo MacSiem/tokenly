@@ -6,8 +6,11 @@ permalink: /support/
 
 # Tokenly — Support
 
-**Contact:** maciek.sieminski@gmail.com
-**Repository:** [github.com/MacSiem/usagedeck](https://github.com/MacSiem/usagedeck)
+> **Canonical:** this page is maintained at [https://macsiem.dev/tokenly/support/](https://macsiem.dev/tokenly/support/) — older mirrors, including this GitHub Pages copy, are deprecated and may lag behind the canonical version.
+
+**Last updated:** 12 July 2026
+**Contact:** mail@macsiem.dev
+**Repository:** [github.com/MacSiem/tokenly](https://github.com/MacSiem/tokenly)
 
 ## Quick answers
 
@@ -31,7 +34,7 @@ Subscription gauges for Claude (Pro / Max 5x / Max 20x) and ChatGPT (Plus / Pro 
 
 ## Reporting a bug or BETA gap
 
-Email **maciek.sieminski@gmail.com** with:
+Email **mail@macsiem.dev** with:
 
 - the platform (iOS / macOS / Android / Windows) and Tokenly version (Settings → About);
 - the provider involved, if any;

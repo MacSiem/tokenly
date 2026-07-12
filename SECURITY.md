@@ -11,7 +11,7 @@ Tokenly is in TestFlight Internal as of 2026-05-26. There is not yet a public st
 
 ## Reporting a vulnerability
 
-If you find a security issue in Tokenly, **please email** `maciek.sieminski@gmail.com` with:
+If you find a security issue in Tokenly, **please email** `mail@macsiem.dev` with:
 
 1. A short description of the issue.
 2. The platform and Tokenly version (visible in Settings → About).
@@ -37,7 +37,7 @@ If the issue is sensitive enough that even the subject line risks disclosure, us
 
 ## Response time
 
-I am a sole-proprietor maintainer. I aim to acknowledge a credible report within **3 working days** and to ship a fix or a documented mitigation within **30 days** for critical issues. Severe/public-exploit-risk issues will take precedence over everything else.
+I am the sole maintainer of this project. I aim to acknowledge a credible report within **3 working days** and to ship a fix or a documented mitigation within **30 days** for critical issues. Severe/public-exploit-risk issues will take precedence over everything else.
 
 ## Disclosure
 

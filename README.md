@@ -44,4 +44,4 @@ This repository is MIT-licensed (see [LICENSE](LICENSE)). The app binaries it do
 
 ## Contact
 
-Maciej Siemiński · maciek.sieminski@gmail.com
+Maciej Siemiński · mail@macsiem.dev · [macsiem.dev](https://macsiem.dev/)
