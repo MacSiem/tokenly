@@ -12,9 +12,15 @@ Every connection Tokenly opens. This is the entire list. Anything not here, Toke
 | LAN multicast | iOS / Android / Windows viewer, when looking for the paired Mac | `_usagedeck._tcp` mDNS query | The Mac's hostname + port |
 | Paired Mac LAN address, port 7642 | iOS / Android / Windows viewer, after pairing | HMAC proof + the pinned TLS fingerprint | A snapshot JSON over TLS |
 | Apple iCloud Drive (`iCloud.dev.macsiem.tokenly` container) | macOS publisher writes; iOS viewer reads — only if iCloud fallback is enabled | An AES-GCM ciphertext blob | The same blob |
-| `trial.tokenly.macsiem.dev` (v0.8+) | Once when you start the 48-hour Premium trial | Random `account_id` UUID + hardware-anchored `device_id` + UTC timestamp | A signed HMAC token that says when the trial ends |
+| `relay.tokenly.macsiem.dev` | Only when encrypted relay fallback is enabled | Opaque account identifier + end-to-end-encrypted snapshot blob | The same ciphertext blob |
+| `status.anthropic.com` / `status.openai.com` | When checking provider service health | Anonymous HTTPS request; no credentials or identifiers | Public incident status |
+| `relay.tokenly.macsiem.dev` → Apple Push Notification service / Firebase Cloud Messaging | Only when push notifications are enabled | Opaque account identifier + platform push token + minimal alert payload; no provider credential, prompt, or completion content | Delivery acknowledgement / notification delivery |
 
-That's the entire list. There is no Tokenly server beyond the single trial-anti-abuse Cloudflare Worker added in v0.8. There is no opt-out flag because there is nothing to opt out of — connections only happen when the corresponding provider is connected and a user-driven event triggers a fetch.
+That's the entire current list. Tokenly operates no inference proxy and its supporting relay cannot decrypt snapshots. Connections happen only when the corresponding provider is connected or the related optional feature is enabled.
+
+## Legacy (removed in 0.7.2 b86)
+
+Desktop builds through 0.7.2 b85 could contact `trial.tokenly.macsiem.dev` for the former trial and licence checks. They sent an opaque device/account identifier and, for licence validation, a licence key. The endpoint remains temporarily available for those builds and is scheduled for decommission.
 
 ## What does NOT travel over the wire
 
@@ -28,7 +34,6 @@ That's the entire list. There is no Tokenly server beyond the single trial-anti-
 
 - macOS publisher logs go to the system unified log under subsystem `dev.macsiem.tokenly`. Credentials are tagged `private` so they're redacted in shared sysdiagnose bundles unless the user explicitly captures with the private flag.
 - iOS / Android / Windows viewers log under their own subsystems; same redaction discipline.
-- The trial Worker logs only category + outcome (started, expired, mismatched). No `account_id` or `device_id` in plaintext.
 
 ## Refresh cadence
 

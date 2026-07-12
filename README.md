@@ -6,7 +6,7 @@ The full application source code lives in a separate private repository. This on
 
 ## What Tokenly does
 
-Tokenly reads usage and cost for the LLM providers you actually use — Claude, ChatGPT, the OpenAI / Anthropic / OpenRouter APIs, and more — **using your own credentials, on the device that holds them**. There is no Tokenly server. Your prompts, your completions, and your chat content are never seen, stored, or proxied by us.
+Tokenly reads usage and cost for the LLM providers you actually use — Claude, ChatGPT, the OpenAI / Anthropic / OpenRouter APIs, and more — **using your own credentials, on the device that holds them**. Tokenly operates no inference or credential proxy; its optional supporting services handle only encrypted snapshots or minimal push-delivery data. Your prompts, your completions, and your chat content are never seen, stored, or proxied by us.
 
 ## What Tokenly does NOT do
 
@@ -16,6 +16,10 @@ Tokenly reads usage and cost for the LLM providers you actually use — Claude, 
 - It does not collect analytics or telemetry of any kind.
 - It does not ship your API keys, session cookies, or bearer tokens off the device that holds them.
 
+## Monetization
+
+Premium features on iOS and Android are available through monthly or yearly subscriptions processed by Apple App Store or Google Play, with a seven-day introductory access period. The macOS and Windows apps are free and unlimited; they do not require a licence or activation.
+
 ## What's in this repository
 
 - [Privacy Policy](privacy.md) — the same policy linked from inside the app and from every store listing.
@@ -24,7 +28,7 @@ Tokenly reads usage and cost for the LLM providers you actually use — Claude, 
 - [Threat model](security/threat-model.md) — what we model against, what's out of scope.
 - [Secure storage](security/secure-storage.md) — exactly where credentials live, per platform.
 - [Network surface](security/network-surface.md) — every host Tokenly opens a connection to, and why.
-- [Cryptography](security/cryptography.md) — algorithms and parameters for the off-LAN snapshot envelope, pairing handshake, and trial anti-abuse token.
+- [Cryptography](security/cryptography.md) — algorithms and parameters for the off-LAN snapshot envelope and pairing handshake.
 - [Architecture overview](architecture/overview.md) — macOS publisher + iOS/Android/Windows viewers + LAN/iCloud sync.
 - [Data flow](architecture/data-flow.md) — what data crosses each platform boundary.
 

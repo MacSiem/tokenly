@@ -19,10 +19,11 @@ Algorithms, parameters, and rotation policy for every cryptographic primitive To
 - **Mutual auth:** HMAC-SHA256 over `(method, path, request_body_sha256, timestamp)` using the per-pair shared secret. The publisher rejects requests with a timestamp drift over 5 minutes (replay defense).
 - **Session token:** issued by the publisher on successful pair, scoped to that one viewer, rotated on every TOFU certificate refresh (e.g. when the user moves the Mac to a new network and regenerates the cert).
 
-## Trial anti-abuse signed token (v0.8+)
+## Legacy (removed in 0.7.2 b86): trial anti-abuse signed token
 
+- **Status:** not used by current builds. Desktop builds through 0.7.2 b85 could use this token for the former licence-access checks.
 - **Algorithm:** HMAC-SHA256.
-- **Signing key:** 32-byte random value held only inside the Cloudflare Worker. Rotated quarterly. Old keys are kept until all live trials issued under them expire.
+- **Signing key:** 32-byte random value held only inside the Cloudflare Worker.
 - **Signed payload:** `account_id | device_id | ends_at_utc` where `account_id` is the random UUID the app minted, `device_id` is the hardware-anchored OS identifier, and `ends_at_utc` is the trial end instant.
 - **Token format:** `payload.signature_hex` (the same shape as a JWS compact serialization without the alg header — we don't need JWS algorithm negotiation here because there's exactly one key holder).
 - **Verification:** the app recomputes the HMAC over the payload it received and compares constant-time. A token whose `ends_at_utc` has passed is also rejected even if the signature verifies, so the local clock alone cannot extend a trial.
@@ -33,4 +34,4 @@ We deliberately avoid:
 - Custom or "rolled" crypto primitives.
 - Key escrow with any third party.
 - Hardware tokens or attestation beyond what the OS provides at no cost (Keystore on Android, Secure Enclave on Apple).
-- Plain-RSA or ECDSA signing schemes (no asymmetric key exchange is needed; the pairing handshake is over TLS, the trial token is single-issuer HMAC).
+- Plain-RSA or ECDSA signing schemes for the current pairing flow (the pairing handshake is over TLS and needs no asymmetric key exchange beyond TLS itself).

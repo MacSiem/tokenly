@@ -17,17 +17,19 @@ Mitigation: pairing tokens, certificate fingerprints, and the shared HMAC secret
 ### Tokenly developer wants to read user prompts
 The maintainer of this codebase tries to extract user chat content.
 
-Mitigation: there is no Tokenly server. The app never sees prompts or completions because it never calls a chat / completion / message endpoint. It only calls the providers' own usage / billing endpoints. Nothing leaves the device that could expose prompt content.
+Mitigation: the app never sees prompts or completions because it never calls a chat / completion / message endpoint. It only calls the providers' own usage / billing endpoints. Supporting encrypted-relay and push-delivery services do not receive prompt content or provider credentials.
 
 ### Compromised cloud provider reading the off-LAN snapshot
 Apple is compromised (or coerced) and reads the contents of the `iCloud.dev.macsiem.tokenly` container.
 
 Mitigation: the snapshot envelope is AES-GCM encrypted with a key derived via HKDF-SHA256 from a secret that lives only on the user's macOS Keychain and the paired iPhone's Keychain. iCloud servers see ciphertext + a version byte; metadata (hostname, fingerprint, write time) is inside the authenticated payload, not in cleartext headers.
 
-### Trial-cycling attacker
+## Legacy (removed in 0.7.2 b86)
+
+### Legacy access-cycling attacker (removed in 0.7.2 b86)
 A user tries to restart the 48-hour Premium trial forever by reinstalling the app.
 
-Mitigation: the trial server (`trial.tokenly.macsiem.dev`, v0.8+) tracks one trial per `tokenly_account_id` AND per hardware-anchored `device_id`. The signed HMAC token from the server is required to unlock trial-gated features; the local clock alone cannot grant a second trial.
+Mitigation used by builds through 0.7.2 b85: the trial server (`trial.tokenly.macsiem.dev`) tracked one trial per `tokenly_account_id` and per hardware-anchored `device_id`. The signed HMAC token from the server was required to unlock trial-gated features. Current builds do not use this mechanism.
 
 ## Out of scope
 
@@ -44,7 +46,6 @@ These are not models Tokenly tries to defend against. They are the user's respon
 
 - AES-256-GCM for the off-LAN snapshot envelope.
 - HKDF-SHA256 for the envelope key derivation.
-- HMAC-SHA256 for trial-anti-abuse signed tokens (v0.8+).
 - TLS 1.2+ with TOFU certificate fingerprint pinning for LAN sync.
 
 Algorithm parameters and rotation policy are in [cryptography.md](cryptography.md).

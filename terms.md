@@ -41,9 +41,14 @@ Tokenly is provided **as is**. Usage and cost numbers come from each LLM provide
 
 To the maximum extent permitted by law, the developer disclaims all warranties (merchantability, fitness for a particular purpose, non-infringement) and is not liable for any indirect, incidental, or consequential damages arising from your use of the app, including any over-budget bills you may receive from a connected provider.
 
-## In-app purchases (future)
+## In-app purchases
 
-Tokenly is free during the current TestFlight beta. A future Premium one-time unlock (~$9.99 USD or local equivalent, cross-platform) may be offered. Purchases are processed by Apple App Store / Google Play / Microsoft Store. Refunds follow the policy of the store that processed the purchase.
+The **desktop apps (macOS, Windows) are free and unlimited** — no purchases,
+trials, or license activation. On **iPhone and Android**, Premium is offered
+as an auto-renewing subscription (monthly or yearly) after a 7-day
+full-featured trial. Purchases are processed entirely by Apple App Store /
+Google Play; refunds follow the policy of the store that processed the
+purchase. There is no cross-platform unlock — desktop needs none.
 
 ## Termination
 

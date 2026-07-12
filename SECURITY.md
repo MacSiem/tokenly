@@ -23,10 +23,14 @@ If the issue is sensitive enough that even the subject line risks disclosure, us
 ## What I treat as in-scope
 
 - The four Tokenly clients: iOS, macOS, Android, Windows.
-- The single Cloudflare Worker `trial.tokenly.macsiem.dev` (v0.8+).
 - The pairing handshake between the macOS publisher and any paired viewer.
 - The off-LAN snapshot envelope (AES-GCM v2 in `iCloud.dev.macsiem.tokenly`).
+- The encrypted snapshot relay and push-notification delivery path.
 - Anything claimed in [privacy](privacy.md) that the app does not actually honor.
+
+## Legacy (removed in 0.7.2 b86)
+
+Desktop builds through 0.7.2 b85 could contact `trial.tokenly.macsiem.dev` for the former trial and licence checks. Reports concerning that endpoint remain in scope while it is temporarily available for those older builds; it is scheduled for decommission.
 
 ## What is out of scope
 

@@ -35,20 +35,32 @@ When the iPhone is off the home Wi-Fi:
 
 Apple's iCloud servers cannot decrypt the snapshot. The decryption key never leaves the user's Keychain.
 
-## Boundary 4 — Viewer → Trial Worker (v0.8+)
+## Boundary 4 — Publisher → Encrypted relay → Viewer (optional fallback)
 
-Only crossed when a Free user taps "Start 48h free trial":
+When enabled, the publisher uploads an opaque account identifier and an end-to-end-encrypted snapshot blob to `relay.tokenly.macsiem.dev`. The relay stores and returns only ciphertext; decryption happens on the paired viewer using key material that never leaves the user's secure stores.
+
+## Boundary 5 — App → Provider status pages
+
+Tokenly may fetch public incident state from `status.anthropic.com` and `status.openai.com`. The request is anonymous and carries no provider credential, Tokenly identifier, or usage data.
+
+## Boundary 6 — App ↔ Platform push service
+
+When notifications are enabled, the viewer registers an opaque account identifier and platform push token with `relay.tokenly.macsiem.dev`. The service uses Apple Push Notification service or Firebase Cloud Messaging to deliver a minimal alert. This path never receives a provider credential, prompt, completion, or raw provider response.
+
+## Boundary 7 — Mobile app ↔ App Store / Google Play
+
+Standard in-app-purchase entitlement flow. The store handles monthly or yearly subscription transactions and the seven-day introductory access period; Tokenly receives a Premium yes/no entitlement flag. The macOS and Windows apps are free and unlimited and do not cross a licensing boundary.
+
+## Legacy (removed in 0.7.2 b86): Viewer → Trial Worker
+
+Desktop builds through 0.7.2 b85 could cross this boundary for the former trial and licence checks:
 
 | Direction | Payload |
 |---|---|
-| Viewer → Worker | `account_id` (random UUID), `device_id` (hardware-anchored), `started_at_utc` |
-| Worker → Viewer | `trial_ends_at_utc`, `signed_token` |
+| Desktop app → Worker | Opaque device/account identifier and, for licence validation, the licence key |
+| Worker → Desktop app | Trial/licence status response |
 
-The Worker stores trial state in a KV namespace for 30 days, then auto-deletes. No name, no email, no usage data, no provider credential ever reaches the Worker.
-
-## Boundary 5 — App ↔ App Store / Play Store / Microsoft Store
-
-Standard IAP receipt flow. The store handles the transaction; Tokenly receives a Premium-yes/no entitlement flag.
+Current builds make no calls to `trial.tokenly.macsiem.dev`. The endpoint remains temporarily available for older builds and is scheduled for decommission.
 
 ## What never crosses any boundary
 
