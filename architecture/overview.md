@@ -16,7 +16,7 @@ flowchart LR
   iPhone[Tokenly viewer iPhone]
   Droid[Tokenly viewer Android]
   Win[Tokenly viewer Windows]
-  Relay[relay.tokenly.macsiem.dev encrypted relay]
+  Relay[trial.tokenly.macsiem.dev encrypted relay]
   Status[Provider status pages]
   Push[APNs / FCM push delivery]
 
@@ -52,7 +52,7 @@ flowchart LR
 - Hold pairing material only: a per-Mac session token, the Mac's TLS fingerprint, and the HMAC secret.
 - Never hold provider credentials. Never see provider responses in cleartext beyond the snapshot the Mac chose to publish.
 - Render the gauges, widgets, and notifications locally.
-- May receive end-to-end-encrypted snapshots through the optional relay at `relay.tokenly.macsiem.dev` and alerts through the platform push service; neither path receives provider credentials or prompt content.
+- May receive end-to-end-encrypted snapshots through the optional relay at `trial.tokenly.macsiem.dev` and alerts through the platform push service; neither path receives provider credentials or prompt content.
 
 ## Why this split
 

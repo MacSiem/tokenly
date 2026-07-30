@@ -37,7 +37,7 @@ Apple's iCloud servers cannot decrypt the snapshot. The decryption key never lea
 
 ## Boundary 4 — Publisher → Encrypted relay → Viewer (optional fallback)
 
-When enabled, the publisher uploads an opaque account identifier and an end-to-end-encrypted snapshot blob to `relay.tokenly.macsiem.dev`. The relay stores and returns only ciphertext; decryption happens on the paired viewer using key material that never leaves the user's secure stores.
+When enabled, the publisher uploads an opaque account identifier and an end-to-end-encrypted snapshot blob to `trial.tokenly.macsiem.dev`. The relay stores and returns only ciphertext; decryption happens on the paired viewer using key material that never leaves the user's secure stores.
 
 ## Boundary 5 — App → Provider status pages
 
@@ -45,7 +45,7 @@ Tokenly may fetch public incident state from `status.anthropic.com` and `status.
 
 ## Boundary 6 — App ↔ Platform push service
 
-When notifications are enabled, the viewer registers an opaque account identifier and platform push token with `relay.tokenly.macsiem.dev`. The service uses Apple Push Notification service or Firebase Cloud Messaging to deliver a minimal alert. This path never receives a provider credential, prompt, completion, or raw provider response.
+When notifications are enabled, the viewer registers an opaque account identifier and platform push token with `trial.tokenly.macsiem.dev`. The service uses Apple Push Notification service or Firebase Cloud Messaging to deliver a minimal alert. This path never receives a provider credential, prompt, completion, or raw provider response.
 
 ## Boundary 7 — Mobile app ↔ App Store / Google Play
 

@@ -12,15 +12,19 @@ Every connection Tokenly opens. This is the entire list. Anything not here, Toke
 | LAN multicast | iOS / Android / Windows viewer, when looking for the paired Mac | `_usagedeck._tcp` mDNS query | The Mac's hostname + port |
 | Paired Mac LAN address, port 7642 | iOS / Android / Windows viewer, after pairing | HMAC proof + the pinned TLS fingerprint | A snapshot JSON over TLS |
 | Apple iCloud Drive (`iCloud.dev.macsiem.tokenly` container) | macOS publisher writes; iOS viewer reads — only if iCloud fallback is enabled | An AES-GCM ciphertext blob | The same blob |
-| `relay.tokenly.macsiem.dev` | Only when encrypted relay fallback is enabled | Opaque account identifier + end-to-end-encrypted snapshot blob | The same ciphertext blob |
+| `trial.tokenly.macsiem.dev` | Only when encrypted relay fallback is enabled | Opaque account identifier + end-to-end-encrypted snapshot blob | The same ciphertext blob |
 | `status.anthropic.com` / `status.openai.com` | When checking provider service health | Anonymous HTTPS request; no credentials or identifiers | Public incident status |
-| `relay.tokenly.macsiem.dev` → Apple Push Notification service / Firebase Cloud Messaging | Only when push notifications are enabled | Opaque account identifier + platform push token + minimal alert payload; no provider credential, prompt, or completion content | Delivery acknowledgement / notification delivery |
+| `trial.tokenly.macsiem.dev` → Apple Push Notification service / Firebase Cloud Messaging | Only when push notifications are enabled | Opaque account identifier + platform push token + minimal alert payload; no provider credential, prompt, or completion content | Delivery acknowledgement / notification delivery |
 
 That's the entire current list. Tokenly operates no inference proxy and its supporting relay cannot decrypt snapshots. Connections happen only when the corresponding provider is connected or the related optional feature is enabled.
 
+## About the `trial.` hostname
+
+The relay host is named `trial.tokenly.macsiem.dev` for historical reasons: the same Cloudflare Worker originally served the trial and licence checks that were removed in 0.7.2 b86. Only the encrypted-relay and push-wake-up roles described in the table above remain. The name is kept because renaming a live production host would break every already-shipped build; it carries no trial or licensing function today.
+
 ## Legacy (removed in 0.7.2 b86)
 
-Desktop builds through 0.7.2 b85 could contact `trial.tokenly.macsiem.dev` for the former trial and licence checks. They sent an opaque device/account identifier and, for licence validation, a licence key. The endpoint remains temporarily available for those builds and is scheduled for decommission.
+Desktop builds through 0.7.2 b85 sent an opaque device/account identifier and, for licence validation, a licence key to the same host for trial and licence checks. Those code paths no longer exist in current builds.
 
 ## What does NOT travel over the wire
 
