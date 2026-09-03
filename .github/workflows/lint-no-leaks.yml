@@ -16,9 +16,8 @@ jobs:
         run: |
           set -eu
           # Each entry below is a literal string that must NEVER appear in this
-          # repository. Most are real Tokenly internal identifiers; the rest
-          # are generic patterns that suggest a credential leak.
-          patterns=(
+          # repository: real Tokenly internal identifiers and key-file headers.
+          literals=(
             "claude_ai_session_cookie"
             "openai_admin_api_key"
             "openai_api_key"
@@ -35,16 +34,30 @@ jobs:
             "BEGIN RSA PRIVATE KEY"
             "BEGIN OPENSSH PRIVATE KEY"
             "-----BEGIN CERTIFICATE-----"
-            "sk-ant-admin-"
-            "sk-or-v1-"
-            "gho_"
-            "ghp_"
+          )
+
+          # Credential prefixes. A bare prefix is not a leak — this is a
+          # transparency repo, and its docs legitimately name the prefixes when
+          # describing which header goes to which provider ("sk-ant-admin-…").
+          # Only a prefix carrying real key material counts, so each pattern
+          # requires a plausible secret body after it.
+          credential_regexes=(
+            "sk-ant-admin-[A-Za-z0-9_-]{16,}"
+            "sk-or-v1-[A-Za-z0-9_-]{16,}"
+            "gh[pousr]_[A-Za-z0-9]{16,}"
           )
 
           hits=0
-          for needle in "${patterns[@]}"; do
+          for needle in "${literals[@]}"; do
             if grep -RIn --exclude-dir=.git --exclude=lint-no-leaks.yml -- "$needle" .; then
               echo "::error::blocked string '$needle' is present in the public transparency repo"
+              hits=$((hits+1))
+            fi
+          done
+
+          for pattern in "${credential_regexes[@]}"; do
+            if grep -REIn --exclude-dir=.git --exclude=lint-no-leaks.yml -- "$pattern" .; then
+              echo "::error::credential matching '$pattern' is present in the public transparency repo"
               hits=$((hits+1))
             fi
           done
