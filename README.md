@@ -1,6 +1,10 @@
 # Tokenly — transparency repo
 
-Tokenly is a local-first LLM usage and cost tracker for Apple (iOS + macOS), Android, and Windows. This repository publishes its **privacy policy, terms, security model, and architecture overview** so anyone can verify the claims Tokenly makes in its in-app onboarding and on the App Store / Play / Microsoft Store listings.
+> **Project on hold / Projekt wstrzymany — 2026-11-15.** Development and distribution are paused. These materials are retained for existing users.
+
+> **Projekt wstrzymany / Project on hold — 2026-11-15.** Rozwój i dystrybucja są wstrzymane. Materiały pozostają dostępne dla obecnych użytkowników.
+
+Tokenly is a local-first LLM usage and cost tracker for Apple (iOS + macOS), Android, and Windows. This repository preserves its **privacy policy, terms, security model, and architecture overview** for existing users to review.
 
 The full application source code lives in a separate private repository. This one carries only the material that lets you audit how Tokenly handles your data, your credentials, and the network surface it opens. That's a deliberate split — privacy claims must be checkable; UX and connector strategy stay private.
 
@@ -18,7 +22,7 @@ Tokenly reads usage and cost for the LLM providers you actually use — Claude, 
 
 ## Monetization
 
-Premium features on iOS and Android are available through monthly or yearly subscriptions processed by Apple App Store or Google Play, with a seven-day introductory access period. The macOS and Windows apps are free and unlimited; they do not require a licence or activation.
+Historically, premium features on iOS and Android were offered through monthly or yearly subscriptions processed by Apple App Store or Google Play, with a seven-day introductory access period. The macOS and Windows apps were free and unlimited, with no licence or activation requirement. Development and distribution are on hold; this section documents past availability and does not announce new purchases.
 
 ## What's in this repository
 
